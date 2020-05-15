@@ -21,7 +21,7 @@ resource "oci_core_instance" "Webserver1" {
     source_id   = lookup(data.oci_core_images.OSImageLocal.images[0], "id")
   }
   metadata = {
-    ssh_authorized_keys = var.public_key_oci
+    ssh_authorized_keys = file(var.ssh_public_key)
   }
   create_vnic_details {
     subnet_id = oci_core_subnet.WebSubnet.id

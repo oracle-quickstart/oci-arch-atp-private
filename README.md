@@ -58,7 +58,7 @@ When you no longer need the deployment, you can run this command to destroy it:
 
     terraform destroy
 
-## Web Application Architecture
+## ATP Private Endpoints Architecture
 
 ![](./images/oci-arch-atp-private.jpg)
 

@@ -1,8 +1,11 @@
 variable "tenancy_ocid" {}
 variable "compartment_ocid" {}
 variable "region" {}
-variable "private_key_oci" {}
-variable "public_key_oci" {}
+variable "fingerprint" {}
+variable "user_ocid" {}
+variable "private_key_path" {}
+variable "ssh_private_key" {}
+variable "ssh_public_key" {}
 variable "ATP_password" {}
 
 variable "VCN-CIDR" {
