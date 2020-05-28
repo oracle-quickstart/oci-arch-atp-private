@@ -1,3 +1,6 @@
+## Copyright (c) 2020, Oracle and/or its affiliates. 
+## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
+
 resource "oci_database_autonomous_database" "ATPdatabase" {
   admin_password           = var.ATP_password
   compartment_id           = var.compartment_ocid
