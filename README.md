@@ -60,7 +60,7 @@ When you no longer need the deployment, you can run this command to destroy it:
 
 ## ATP Private Endpoints Architecture
 
-![](./images/oci-arch-atp-private.jpg)
+![](./images/oci-arch-atp-private.png)
 
 ## Reference Archirecture
 
