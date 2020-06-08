@@ -32,7 +32,7 @@ variable "Shape" {
 }
 
 variable "OsImage" {
-  default = "Oracle-Linux-7.7-2020.02.21-0"
+   default = "Oracle-Linux-7.8-2020.05.26-0"
 }
 
 variable "ATP_database_cpu_core_count" {

@@ -9,6 +9,7 @@ resource "oci_core_subnet" "ATPEndpointSubnet" {
   vcn_id = oci_core_virtual_network.VCN.id
   route_table_id = oci_core_route_table.RouteTableViaNAT.id
   dhcp_options_id = oci_core_dhcp_options.DhcpOptions1.id
+  prohibit_public_ip_on_vnic = true
 }
 
 
