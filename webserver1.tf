@@ -18,7 +18,6 @@ resource "oci_core_instance" "Webserver1" {
   compartment_id      = var.compartment_ocid
   display_name        = "WebServer1"
   shape               = var.Shape
-  subnet_id           = oci_core_subnet.WebSubnet.id
   source_details {
     source_type = "image"
     source_id   = lookup(data.oci_core_images.OSImageLocal.images[0], "id")
