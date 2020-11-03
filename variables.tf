@@ -24,7 +24,7 @@ variable "Webserver_PublicSubnet-CIDR" {
 }
 
 variable "VCNname" {
-  default = "FoggyKitchenVCN"
+  default = "VCN"
 }
 
 variable "Shape" {
