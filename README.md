@@ -2,7 +2,7 @@
 
 Deploy Private Endpoint for Autonomous Database to take advantage of the fully managed, preconfigured database environment of Oracle Autonomous Database in private subnets of Oracle Cloud Infrastructure. This reference architecture deploys Autonomous Private Endpoint and Flask-based Webserver on Oracle Cloud Infrastructure. 
 
-For details of the architecture, see [_Deploy Private Endpoints for Autonomous Database_](https://docs.oracle.com/en/solutions/atp-private/index.html)
+For details of the architecture, see [_Deploy Private Endpoints for Autonomous Database_](https://docs.oracle.com/en/solutions/autonomous-db-private-endpoint/index.html)
 
 ## Prerequisites
 
