@@ -65,13 +65,13 @@
       # Optional Configuration
       ssh_private_key:
         type: oci:core:ssh:privatekey
-        required: true
+        required: false
         title: "SSH Private Key"
         description: "SSH Private Key to access Flask-based Webserver VM."
 
       ssh_public_key:
         type: oci:core:ssh:publickey
-        required: true
+        required: false
         title: "SSH Public Key"
         description: "SSH Public Key to access Flask-based Webserver VM."
 
