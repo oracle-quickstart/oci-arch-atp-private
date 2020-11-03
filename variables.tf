@@ -7,9 +7,14 @@ variable "region" {}
 variable "fingerprint" {}
 variable "user_ocid" {}
 variable "private_key_path" {}
-variable "ssh_private_key" {}
-variable "ssh_public_key" {}
 variable "ATP_password" {}
+
+variable "ssh_private_key" {
+  default = ""
+}
+variable "ssh_public_key" {
+  default = ""
+}
 
 variable "VCN-CIDR" {
   default = "10.0.0.0/16"
@@ -24,7 +29,7 @@ variable "Webserver_PublicSubnet-CIDR" {
 }
 
 variable "VCNname" {
-  default = "FoggyKitchenVCN"
+  default = "VCN"
 }
 
 variable "Shape" {
