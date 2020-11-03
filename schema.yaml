@@ -19,13 +19,12 @@
       visible: true  
       variables:
       - ATP_password
-      - ssh_private_key
-      - ssh_public_key
-      
 
     - title: Optional Configuration
       visible: true
       variables:      
+      - ssh_private_key
+      - ssh_public_key
       - VCN-CIDR
       - ATP_PrivateSubnet-CIDR
       - Webserver_PublicSubnet-CIDR
@@ -63,6 +62,7 @@
         title: "ATP Database Password"
         description: "ATP Database Password for ADMIN user."
 
+      # Optional Configuration
       ssh_private_key:
         type: oci:core:ssh:privatekey
         required: true
@@ -75,7 +75,6 @@
         title: "SSH Public Key"
         description: "SSH Public Key to access Flask-based Webserver VM."
 
-      # Optional Configuration
       VCN-CIDR:
          type: string
          required: false
