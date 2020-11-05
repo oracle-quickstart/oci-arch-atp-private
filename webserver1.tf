@@ -23,7 +23,7 @@ resource "oci_core_instance" "Webserver1" {
     source_id   = lookup(data.oci_core_images.OSImageLocal.images[0], "id")
   }
   metadata = {
-    ssh_authorized_keys = var.ssh_public_key != "" ? var.ssh_public_key : tls_private_key.public_private_key_pair.public_key_openssh
+    ssh_authorized_keys = tls_private_key.public_private_key_pair.public_key_openssh
   }
   create_vnic_details {
     subnet_id = oci_core_subnet.WebSubnet.id
@@ -41,6 +41,3 @@ data "oci_core_vnic" "Webserver1_VNIC1" {
   vnic_id = data.oci_core_vnic_attachments.Webserver1_VNIC1_attach.vnic_attachments.0.vnic_id
 }
 
-output "Webserver1_PublicIP" {
-  value = [data.oci_core_vnic.Webserver1_VNIC1.public_ip_address]
-}

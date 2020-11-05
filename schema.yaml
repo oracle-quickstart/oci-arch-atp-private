@@ -11,20 +11,18 @@
     - title: General Configuration
       visible: false
       variables:
-      - compartment_ocid
       - tenancy_ocid
-      - region
 
     - title: Required Configuration
       visible: true  
       variables:
       - ATP_password
+      - compartment_ocid
+      - region
 
     - title: Optional Configuration
       visible: true
       variables:      
-      - ssh_private_key
-      - ssh_public_key
       - VCN-CIDR
       - ATP_PrivateSubnet-CIDR
       - Webserver_PublicSubnet-CIDR
@@ -47,12 +45,14 @@
       compartment_ocid:
         type: oci:identity:compartment:id
         required: true
+        visibile: true
         title: Compartment
         description: "Compartment where you want to create the solution resources"
 
       region:
         type: oci:identity:region:name
         required: true
+        visibile: true
         title: Region
         description: "Region where you want to deploy the resources defined by this stack."
 
@@ -63,18 +63,6 @@
         description: "ATP Database Password for ADMIN user."
 
       # Optional Configuration
-      ssh_private_key:
-        type: oci:core:ssh:privatekey
-        required: false
-        title: "SSH Private Key"
-        description: "SSH Private Key to access Flask-based Webserver VM."
-
-      ssh_public_key:
-        type: oci:core:ssh:publickey
-        required: false
-        title: "SSH Public Key"
-        description: "SSH Public Key to access Flask-based Webserver VM."
-
       VCN-CIDR:
          type: string
          required: false
@@ -171,3 +159,16 @@
         type: string
         required: false
         description: "ATP Database Defined Tags"
+
+    outputs:
+      webserver1_public_ip:
+      title: "Webserver1 Public IP"
+      displayText: "Webserver1 Public IP"
+      type: copyableString
+      visible: true
+  
+    generated_ssh_private_key:
+      title: "Generated SSH Private Key"
+      displayText: "Generated SSH Private Key"
+      type: string
+      visible: true

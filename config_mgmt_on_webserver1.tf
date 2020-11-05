@@ -9,7 +9,7 @@ resource "null_resource" "Webserver1_ConfigMgmt" {
       type        = "ssh"
       user        = "opc"
       host        = data.oci_core_vnic.Webserver1_VNIC1.public_ip_address
-      private_key = var.ssh_private_key != "" ? var.ssh_private_key : tls_private_key.public_private_key_pair.private_key_pem
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -33,7 +33,7 @@ resource "null_resource" "Webserver1_ConfigMgmt" {
       type        = "ssh"
       user        = "opc"
       host        = data.oci_core_vnic.Webserver1_VNIC1.public_ip_address
-      private_key = var.ssh_private_key != "" ? var.ssh_private_key : tls_private_key.public_private_key_pair.private_key_pem
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -59,7 +59,7 @@ resource "null_resource" "Webserver1_ConfigMgmt" {
       type        = "ssh"
       user        = "opc"
       host        = data.oci_core_vnic.Webserver1_VNIC1.public_ip_address
-      private_key = var.ssh_private_key != "" ? var.ssh_private_key : tls_private_key.public_private_key_pair.private_key_pem
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -73,7 +73,7 @@ resource "null_resource" "Webserver1_ConfigMgmt" {
       type        = "ssh"
       user        = "opc"
       host        = data.oci_core_vnic.Webserver1_VNIC1.public_ip_address
-      private_key = var.ssh_private_key != "" ? var.ssh_private_key : tls_private_key.public_private_key_pair.private_key_pem
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -87,7 +87,7 @@ resource "null_resource" "Webserver1_ConfigMgmt" {
       type        = "ssh"
       user        = "opc"
       host        = data.oci_core_vnic.Webserver1_VNIC1.public_ip_address
-      private_key = var.ssh_private_key != "" ? var.ssh_private_key : tls_private_key.public_private_key_pair.private_key_pem
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -101,7 +101,7 @@ resource "null_resource" "Webserver1_ConfigMgmt" {
       type        = "ssh"
       user        = "opc"
       host        = data.oci_core_vnic.Webserver1_VNIC1.public_ip_address
-      private_key = var.ssh_private_key != "" ? var.ssh_private_key : tls_private_key.public_private_key_pair.private_key_pem
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
@@ -122,7 +122,7 @@ resource "null_resource" "Webserver1_Flask_WebServer_and_access_ATP" {
       type        = "ssh"
       user        = "opc"
       host        = data.oci_core_vnic.Webserver1_VNIC1.public_ip_address
-      private_key = var.ssh_private_key != "" ? var.ssh_private_key : tls_private_key.public_private_key_pair.private_key_pem
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
