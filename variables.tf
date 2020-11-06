@@ -53,7 +53,7 @@ variable "ATP_database_db_name" {
 }
 
 variable "ATP_database_db_version" {
-  default = "18c"
+  default = "19c"
 }
 
 variable "ATP_database_defined_tags_value" {
