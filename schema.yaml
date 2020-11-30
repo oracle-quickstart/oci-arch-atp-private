@@ -110,12 +110,18 @@
       ATP_database_cpu_core_count:
         type: number
         required: false
+        minimum: 1
+        maximum: 128
+        multipleOf: 1
         default: 1
         description: "ATP Database CPU Core Count"
 
       ATP_database_data_storage_size_in_tbs:
         type: number
         required: false
+        minimum: 1
+        maximum: 128
+        multipleOf: 1
         default: 1
         description: "ATP Database Data Storage Size in terabytes"
 
@@ -132,7 +138,6 @@
         description: "ATP Database Version"
         enum:
           - "19c"
-          - "18c"
 
       ATP_database_display_name:
         type: string

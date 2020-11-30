@@ -9,13 +9,6 @@ variable "user_ocid" {}
 variable "private_key_path" {}
 variable "ATP_password" {}
 
-#variable "ssh_private_key" {
-#  default = ""
-#}
-#variable "ssh_public_key" {
-#  default = ""
-#}
-
 variable "VCN-CIDR" {
   default = "10.0.0.0/16"
 }
