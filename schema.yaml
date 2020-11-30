@@ -177,14 +177,15 @@
         description: "ATP Database Defined Tags"
 
     outputs:
+      
       webserver1_public_ip:
-      title: "Webserver1 Public IP"
-      displayText: "Webserver1 Public IP"
-      type: copyableString
-      visible: true
+        title: "Webserver1 Public IP"
+        displayText: "Webserver1 Public IP"
+        type: copyableString
+        visible: true
   
-    generated_ssh_private_key:
-      title: "Generated SSH Private Key"
-      displayText: "Generated SSH Private Key"
-      type: string
-      visible: true
+      generated_ssh_private_key:
+        title: "Generated SSH Private Key"
+        displayText: "Generated SSH Private Key"
+        type: string
+        visible: true

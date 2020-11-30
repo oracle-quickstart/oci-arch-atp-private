@@ -50,7 +50,7 @@ variable "ATP_database_db_version" {
 }
 
 variable "ATP_database_defined_tags_value" {
-  default = "value"
+  default = ""
 }
 
 variable "ATP_database_display_name" {
