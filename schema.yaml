@@ -61,6 +61,9 @@
         required: true
         title: "ATP Database Password"
         description: "ATP Database Password for ADMIN user."
+        minLength: 12
+        maxLength: 30
+        pattern: ^[A-Za-z][A-Za-z0-9_#\$]+$ 
 
       # Optional Configuration
       VCN-CIDR:
@@ -91,10 +94,12 @@
         description: "Name for your VCN where want to create the solution resources."  
       
       Shape:
-        type: string
+        type: oci:core:instanceshape:name
         required: false
         default: "VM.Standard.E2.1"
         description: "Shape of the VM used for Flask-based Webserver VM."
+        dependsOn:
+          compartmentId: ${compartment_ocid}
 
       OsImage:
         type: string
@@ -121,10 +126,13 @@
         description: "ATP Database DBNAME"
 
       ATP_database_db_version:
-        type: string
+        type: enum
         required: false
         default: "19c"
         description: "ATP Database Version"
+        enum:
+          - "19c"
+          - "18c"
 
       ATP_database_display_name:
         type: string
@@ -133,10 +141,13 @@
         description: "ATP Database Display Name"
 
       ATP_database_license_model:
-        type: string
+        type: enum
         required: false
         default: "LICENSE_INCLUDED"
         description: "ATP Database License Model"
+        enum:
+          - "LICENSE_INCLUDED"
+          - "BRING_YOUR_OWN_LICENSE"
 
       ATP_tde_wallet_zip_file:
         type: string
