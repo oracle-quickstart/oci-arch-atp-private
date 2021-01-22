@@ -76,3 +76,12 @@ variable "ATP_private_endpoint_label" {
   default = "ATPPrivateEndpoint"
 }
 
+variable "instance_os" {
+  description = "Operating system for compute instances"
+  default     = "Oracle Linux"
+}
+
+variable "linux_os_version" {
+  description = "Operating system version for all Linux instances"
+  default     = "7.8"
+}
