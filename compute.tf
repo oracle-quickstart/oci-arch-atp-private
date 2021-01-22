@@ -2,7 +2,7 @@
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 resource "oci_core_instance" "Webserver1" {
-  availability_domain = lookup(data.oci_identity_availability_domains.ADs.availability_domains[0], "name")
+  availability_domain = var.availablity_domain_name
   compartment_id      = var.compartment_ocid
   display_name        = "WebServer1"
   shape               = var.Shape
@@ -20,7 +20,7 @@ resource "oci_core_instance" "Webserver1" {
 }
 
 data "oci_core_vnic_attachments" "Webserver1_VNIC1_attach" {
-  availability_domain = lookup(data.oci_identity_availability_domains.ADs.availability_domains[0], "name")
+  availability_domain = var.availablity_domain_name
   compartment_id = var.compartment_ocid
   instance_id         = oci_core_instance.Webserver1.id
 }
