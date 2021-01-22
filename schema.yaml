@@ -12,13 +12,13 @@
       visible: false
       variables:
       - tenancy_ocid
+      - region
 
     - title: Required Configuration
       visible: true  
       variables:
       - ATP_password
       - compartment_ocid
-      - region
 
     - title: Optional Configuration
       visible: true
@@ -28,7 +28,8 @@
       - Webserver_PublicSubnet-CIDR
       - VCNname
       - Shape
-      - OsImage
+      - instance_os
+      - linux_os_version 
       - ATP_database_cpu_core_count
       - ATP_database_data_storage_size_in_tbs
       - ATP_database_db_name
@@ -90,7 +91,7 @@
       VCNname:
         type: string
         required: false
-        default: "VCN"
+        default: "VCN Name"
         description: "Name for your VCN where want to create the solution resources."  
       
       Shape:
@@ -101,11 +102,23 @@
         dependsOn:
           compartmentId: ${compartment_ocid}
 
-      OsImage:
-        type: string
+      instance_os:
+        type: enum
         required: false
-        default: "Oracle-Linux-7.8-2020.05.26-0"
-        description: "OEL image used for Flask-based Webserver VM."
+        title: "Instance OS"
+        description: "An Operating System that determines the operating system for the instance."
+        default: "Oracle Linux"
+        enum:
+          - "Oracle Linux"
+      
+      linux_os_version:
+        type: enum
+        required: false
+        title: "Instance OS version"
+        description: "An Operating System version that determines the operating system version for the instance."
+        default: "7.8"
+        enum:
+          - "7.8"
 
       ATP_database_cpu_core_count:
         type: number
@@ -157,6 +170,7 @@
       ATP_tde_wallet_zip_file:
         type: string
         required: false
+        visible: false
         default: "tde_wallet_ATPdb1.zip"
         description: "ATP Database TDE Wallet ZIP File"
       

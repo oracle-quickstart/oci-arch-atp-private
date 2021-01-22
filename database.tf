@@ -15,3 +15,14 @@ resource "oci_database_autonomous_database" "ATPdatabase" {
   private_endpoint_label   = var.ATP_private_endpoint_label
   subnet_id                = oci_core_subnet.ATPEndpointSubnet.id     
 }
+
+resource "random_string" "wallet_password" {
+  length  = 16
+  special = true
+}
+
+resource "oci_database_autonomous_database_wallet" "ATP_database_wallet" {
+  autonomous_database_id = oci_database_autonomous_database.ATPdatabase.id
+  password               = random_string.wallet_password.result
+  base64_encode_content  = "true"
+}
