@@ -9,6 +9,7 @@ resource "oci_core_subnet" "WebSubnet" {
   vcn_id = oci_core_virtual_network.VCN.id
   route_table_id = oci_core_route_table.RouteTableViaIGW.id
   dhcp_options_id = oci_core_dhcp_options.DhcpOptions1.id
+  defined_tags   = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 

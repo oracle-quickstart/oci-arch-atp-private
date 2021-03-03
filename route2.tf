@@ -10,5 +10,6 @@ resource "oci_core_route_table" "RouteTableViaNAT" {
         destination_type  = "CIDR_BLOCK"
         network_entity_id = oci_core_nat_gateway.NATGateway.id
     }
+    defined_tags   = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 

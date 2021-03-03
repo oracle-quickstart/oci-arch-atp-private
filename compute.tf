@@ -17,6 +17,7 @@ resource "oci_core_instance" "Webserver1" {
     subnet_id = oci_core_subnet.WebSubnet.id
     nsg_ids   = [oci_core_network_security_group.WebSecurityGroup.id, oci_core_network_security_group.SSHSecurityGroup.id]
   }
+  defined_tags   = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 data "oci_core_vnic_attachments" "Webserver1_VNIC1_attach" {

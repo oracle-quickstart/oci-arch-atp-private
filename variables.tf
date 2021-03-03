@@ -10,6 +10,11 @@ variable "private_key_path" {}
 variable "availablity_domain_name" {}
 variable "ATP_password" {}
 
+variable "release" {
+  description = "Reference Architecture Release (OCI Architecture Center)"
+  default     = "1.0"
+}
+
 variable "VCN-CIDR" {
   default = "10.0.0.0/16"
 }
@@ -43,7 +48,7 @@ variable "ATP_database_data_storage_size_in_tbs" {
 }
 
 variable "ATP_database_db_name" {
-  default = "atpdb1"
+  default = "myatpdb"
 }
 
 variable "ATP_database_db_version" {
@@ -83,5 +88,5 @@ variable "instance_os" {
 
 variable "linux_os_version" {
   description = "Operating system version for all Linux instances"
-  default     = "7.8"
+  default     = "7.9"
 }

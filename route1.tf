@@ -10,4 +10,5 @@ resource "oci_core_route_table" "RouteTableViaIGW" {
         destination_type  = "CIDR_BLOCK"
         network_entity_id = oci_core_internet_gateway.InternetGateway.id
     }
+    defined_tags   = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }

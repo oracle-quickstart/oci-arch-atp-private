@@ -10,6 +10,7 @@ resource "oci_core_subnet" "ATPEndpointSubnet" {
   route_table_id = oci_core_route_table.RouteTableViaNAT.id
   dhcp_options_id = oci_core_dhcp_options.DhcpOptions1.id
   prohibit_public_ip_on_vnic = true
+  defined_tags   = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 

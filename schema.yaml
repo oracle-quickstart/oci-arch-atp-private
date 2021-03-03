@@ -41,6 +41,7 @@
       - ATP_private_endpoint_label
       - ATP_database_freeform_tags
       - ATP_database_defined_tags_value
+      - release
     
     variables:
 
@@ -127,9 +128,10 @@
         required: false
         title: "Instance OS version"
         description: "An Operating System version that determines the operating system version for the instance."
-        default: "7.8"
+        default: "7.9"
         enum:
           - "7.8"
+          - "7.9"
 
       ATP_database_cpu_core_count:
         type: number
@@ -152,7 +154,7 @@
       ATP_database_db_name:
         type: string
         required: false
-        default: "atpdb1"
+        default: "myatpdb"
         description: "ATP Database DBNAME"
 
       ATP_database_db_version:
@@ -200,6 +202,12 @@
         type: string
         required: false
         description: "ATP Database Defined Tags"
+
+      release:
+        type: string
+        required: false
+        visible: false
+        title: "Reference Architecture Release (OCI Architecture Center)"
 
     outputs:
       
