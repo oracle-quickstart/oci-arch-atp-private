@@ -17,13 +17,13 @@ resource "oci_database_autonomous_database" "ATPdatabase" {
   defined_tags   = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }  
 }
 
-resource "random_string" "wallet_password" {
+resource "random_password" "wallet_password" {
   length  = 16
   special = true
 }
 
 resource "oci_database_autonomous_database_wallet" "ATP_database_wallet" {
   autonomous_database_id = oci_database_autonomous_database.ATPdatabase.id
-  password               = random_string.wallet_password.result
+  password               = random_password.wallet_password.result
   base64_encode_content  = "true"
 }
