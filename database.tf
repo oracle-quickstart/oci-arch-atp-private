@@ -22,12 +22,6 @@ resource "random_password" "wallet_password" {
   special = true
 }
 
-resource "random_password" "password" {
-  length           = 16
-  special          = true
-  override_special = "_%@"
-}
-
 resource "oci_database_autonomous_database_wallet" "ATP_database_wallet" {
   autonomous_database_id = oci_database_autonomous_database.ATPdatabase.id
   password               = random_password.wallet_password.result
