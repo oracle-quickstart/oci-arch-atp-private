@@ -12,7 +12,7 @@ variable "ATP_password" {}
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.0"
+  default     = "1.1"
 }
 
 variable "VCN-CIDR" {
