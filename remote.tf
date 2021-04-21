@@ -1,32 +1,44 @@
 ## Copyright (c) 2020, Oracle and/or its affiliates. 
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
+data "template_file" "flask_ATP_py_template" {
+  template = file("./scripts/flask_ATP.py")
+
+  vars = {
+    ATP_password = var.ATP_password
+    ATP_alias = join("",[var.ATP_database_db_name,"_medium"])
+    oracle_instant_client_version_short = var.oracle_instant_client_version_short
+  }
+}
+
+data "template_file" "flask_ATP_sh_template" {
+  template = file("./scripts/flask_ATP.sh")
+
+  vars = {
+    oracle_instant_client_version_short = var.oracle_instant_client_version_short
+  }
+}
+
+data "template_file" "flask_bootstrap_template" {
+  template = file("./scripts/flask_bootstrap.sh")
+
+  vars = {
+    ATP_tde_wallet_zip_file = var.ATP_tde_wallet_zip_file
+    oracle_instant_client_version = var.oracle_instant_client_version
+    oracle_instant_client_version_short = var.oracle_instant_client_version_short
+  }
+}
+
+data "template_file" "sqlnet_ora_template" {
+  template = file("./scripts/sqlnet.ora")
+
+  vars = {
+    oracle_instant_client_version_short = var.oracle_instant_client_version_short
+  }
+}
+
 resource "null_resource" "Webserver1_ConfigMgmt" {
   depends_on = [oci_core_instance.Webserver1, oci_database_autonomous_database.ATPdatabase]
-
-  provisioner "remote-exec" {
-    connection {
-      type        = "ssh"
-      user        = "opc"
-      host        = data.oci_core_vnic.Webserver1_VNIC1.public_ip_address
-      private_key = tls_private_key.public_private_key_pair.private_key_pem
-      script_path = "/home/opc/myssh.sh"
-      agent       = false
-      timeout     = "10m"
-    }
-    inline = ["echo '== 1. Install Oracle instant client'",
-      "sudo -u root yum -y install oracle-release-el7",
-      "sudo -u root yum-config-manager --enable ol7_oracle_instantclient",
-      "sudo -u root yum -y install oracle-instantclient18.3-basic",
-
-      "echo '== 2. Install Python3, and then with pip3 cx_Oracle and flask'",
-      "sudo -u root yum install -y python36",
-      "sudo -u root pip3 install cx_Oracle",
-      "sudo -u root pip3 install flask",
-
-      "echo '== 3. Disabling firewall and starting HTTPD service'",
-    "sudo -u root service firewalld stop"]
-  }
 
   provisioner "file" {
     connection {
@@ -38,7 +50,7 @@ resource "null_resource" "Webserver1_ConfigMgmt" {
       agent       = false
       timeout     = "10m"
     }
-    source      = "sqlnet.ora"
+    content     = data.template_file.sqlnet_ora_template.rendered
     destination = "/tmp/sqlnet.ora"
   }
 
@@ -78,7 +90,7 @@ resource "null_resource" "Webserver1_ConfigMgmt" {
       agent       = false
       timeout     = "10m"
     }
-    source      = "flask_ATP.py"
+    content     = data.template_file.flask_ATP_py_template.rendered
     destination = "/tmp/flask_ATP.py"
   }
 
@@ -92,10 +104,24 @@ resource "null_resource" "Webserver1_ConfigMgmt" {
       agent       = false
       timeout     = "10m"
     }
-    source      = "flask_ATP.sh"
+    content     = data.template_file.flask_ATP_sh_template.rendered
     destination = "/tmp/flask_ATP.sh"
   }
 
+  provisioner "file" {
+    connection {
+      type        = "ssh"
+      user        = "opc"
+      host        = data.oci_core_vnic.Webserver1_VNIC1.public_ip_address
+      private_key = tls_private_key.public_private_key_pair.private_key_pem
+      script_path = "/home/opc/myssh.sh"
+      agent       = false
+      timeout     = "10m"
+    }
+    content     = data.template_file.flask_bootstrap_template.rendered
+    destination = "/tmp/flask_bootstrap.sh"
+  }
+
   provisioner "remote-exec" {
     connection {
       type        = "ssh"
@@ -106,35 +132,11 @@ resource "null_resource" "Webserver1_ConfigMgmt" {
       agent       = false
       timeout     = "10m"
     }
-    inline = ["echo '== 4. Unzip TDE wallet zip file'",
-      "sudo -u root unzip -o /tmp/${var.ATP_tde_wallet_zip_file} -d /usr/lib/oracle/18.3/client64/lib/network/admin/",
-      "echo '== 5. Move sqlnet.ora to /usr/lib/oracle/18.3/client64/lib/network/admin/'",
-      "sudo -u root cp /tmp/sqlnet.ora /usr/lib/oracle/18.3/client64/lib/network/admin/"]
+    inline = [
+    "chmod +x /tmp/flask_bootstrap.sh",
+    "sudo /tmp/flask_bootstrap.sh"]
   }
 
 }
 
-resource "null_resource" "Webserver1_Flask_WebServer_and_access_ATP" {
-  depends_on = [null_resource.Webserver1_ConfigMgmt]
 
-  provisioner "remote-exec" {
-    connection {
-      type        = "ssh"
-      user        = "opc"
-      host        = data.oci_core_vnic.Webserver1_VNIC1.public_ip_address
-      private_key = tls_private_key.public_private_key_pair.private_key_pem
-      script_path = "/home/opc/myssh.sh"
-      agent       = false
-      timeout     = "10m"
-    }
-    inline = ["echo '== 6. Run Flask with ATP access'",
-      "sudo -u root python3 --version",
-      "sudo -u root chmod +x /tmp/flask_ATP.sh",
-      "sudo -u root sed -i 's/ATP_password/${var.ATP_password}/g' /tmp/flask_ATP.py",
-      "sudo -u root sed -i 's/ATP_alias/${var.ATP_database_db_name}_medium/g' /tmp/flask_ATP.py",
-      "sudo -u root nohup /tmp/flask_ATP.sh > /tmp/flask_ATP.log &",
-      "sleep 5",
-    "sudo -u root ps -ef | grep flask"]
-  }
-
-}

@@ -12,7 +12,15 @@ variable "ATP_password" {}
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.1"
+  default     = "1.2"
+}
+
+variable "oracle_instant_client_version" {
+  default     = "21.1"
+}
+
+variable "oracle_instant_client_version_short" {
+  default     = "21"
 }
 
 variable "VCN-CIDR" {
@@ -32,7 +40,23 @@ variable "VCNname" {
 }
 
 variable "Shape" {
-  default = "VM.Standard.E2.1"
+   default = "VM.Standard.E3.Flex"
+}
+
+variable "Shape_flex_ocpus" {
+    default = 1
+}
+
+variable "Shape_flex_memory" {
+    default = 10
+}
+
+variable "ssh_public_key" {
+  default = ""
+}
+
+variable "ATP_private_endpoint" {
+  default = true
 }
 
 variable "ATP_database_cpu_core_count" {
@@ -85,4 +109,18 @@ variable "instance_os" {
 variable "linux_os_version" {
   description = "Operating system version for all Linux instances"
   default     = "7.9"
+#  default     = "8"
+}
+
+# Dictionary Locals
+locals {
+  compute_flexible_shapes = [
+    "VM.Standard.E3.Flex",
+    "VM.Standard.E4.Flex"
+  ]
+}
+
+# Checks if is using Flexible Compute Shapes
+locals {
+  is_flexible_node_shape = contains(local.compute_flexible_shapes, var.Shape)
 }
