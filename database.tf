@@ -14,7 +14,7 @@ resource "oci_database_autonomous_database" "ATPdatabase" {
   nsg_ids                  = var.ATP_private_endpoint ? [oci_core_network_security_group.ATPSecurityGroup.id] : null   
   private_endpoint_label   = var.ATP_private_endpoint ? var.ATP_private_endpoint_label : null
   subnet_id                = var.ATP_private_endpoint ? oci_core_subnet.ATPEndpointSubnet.id : null  
-  defined_tags   = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }  
+  defined_tags             = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }  
 }
 
 resource "random_password" "wallet_password" {

@@ -23,6 +23,7 @@
       - compartment_ocid
       - availablity_domain_name 
       - ATP_password
+      - ATP_private_endpoint
       - show_advanced       
 
     - title: Networking Optional Configuration
@@ -52,7 +53,6 @@
           and:
             - show_advanced
       variables: 
-      - ATP_private_endpoint
       - ATP_database_cpu_core_count
       - ATP_database_data_storage_size_in_tbs
       - ATP_database_db_name
