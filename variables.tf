@@ -12,7 +12,7 @@ variable "ATP_password" {}
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.2"
+  default     = "1.3"
 }
 
 variable "oracle_instant_client_version" {
