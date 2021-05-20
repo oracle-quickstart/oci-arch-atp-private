@@ -166,6 +166,9 @@
               - eq:
                 - Shape 
                 - "VM.Standard.E4.Flex"
+              - eq:
+                - Shape
+                - "VM.Optimized3.Flex"
 
       Shape_flex_memory:
         type: number
@@ -185,6 +188,9 @@
               - eq:
                 - Shape
                 - "VM.Standard.E4.Flex"
+              - eq:
+                - Shape
+                - "VM.Optimized3.Flex"
 
       instance_os:
         type: enum
