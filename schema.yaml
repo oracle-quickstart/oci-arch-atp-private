@@ -171,7 +171,7 @@
                 - "VM.Optimized3.Flex"
               - eq:
                 - Shape
-                - VM.Standard.A1.Flex"
+                - "VM.Standard.A1.Flex"
 
       Shape_flex_memory:
         type: number
@@ -196,7 +196,7 @@
                 - "VM.Optimized3.Flex"
               - eq:
                 - Shape
-                - VM.Standard.A1.Flex"
+                - "VM.Standard.A1.Flex"
 
       instance_os:
         type: enum
