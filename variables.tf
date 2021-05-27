@@ -12,15 +12,17 @@ variable "ATP_password" {}
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.3"
+  default     = "1.4"
 }
 
 variable "oracle_instant_client_version" {
-  default     = "21.1"
+#  default     = "21.1"
+   default     = "19.10"
 }
 
 variable "oracle_instant_client_version_short" {
-  default     = "21"
+#  default     = "21"
+  default     = "19.10"
 }
 
 variable "VCN-CIDR" {
@@ -40,7 +42,7 @@ variable "VCNname" {
 }
 
 variable "Shape" {
-   default = "VM.Standard.E3.Flex"
+   default = "VM.Standard.A1.Flex"
 }
 
 variable "Shape_flex_ocpus" {
@@ -53,6 +55,10 @@ variable "Shape_flex_memory" {
 
 variable "ssh_public_key" {
   default = ""
+}
+
+variable "ATP_free_tier" {
+  default = true
 }
 
 variable "ATP_private_endpoint" {

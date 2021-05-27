@@ -23,6 +23,7 @@
       - compartment_ocid
       - availablity_domain_name 
       - ATP_password
+      - ATP_free_tier
       - ATP_private_endpoint
       - show_advanced       
 
@@ -106,6 +107,14 @@
         maxLength: 30
         pattern: ^[A-Za-z][A-Za-z0-9_#\$]+$ 
 
+      ATP_free_tier:
+        type: boolean
+        visibile: true
+        default: true
+        required: false
+        title: "ATP Database Free Tier"
+        description: "Check the box to deploy ATP Database Free Tier."
+
       # Optional Configuration
       VCN-CIDR:
          type: string
@@ -143,7 +152,7 @@
       Shape:
         type: oci:core:instanceshape:name
         required: false
-        default: "VM.Standard.E3.Flex"
+        default: "VM.Standard.A1.Flex"
         description: "Shape of the VM used for Flask-based Webserver VM."
         dependsOn:
           compartmentId: ${compartment_ocid}
