@@ -19,7 +19,7 @@ then
   then
     echo '=== 2.1 aarch64 platform & OL8' 
   	yum install -y https://yum.oracle.com/repo/OracleLinux/OL8/oracle/instantclient/aarch64/getPackage/oracle-instantclient${oracle_instant_client_version_short}-basic-${oracle_instant_client_version_short}.0.0.0-1.aarch64.rpm
-  	yum install -y https://yum.oracle.com/repo/OracleLinux/OL8/oracle/instantclient/6aarch4/getPackage/oracle-instantclient${oracle_instant_client_version_short}-sqlplus-${oracle_instant_client_version_short}.0.0.0-1.aarch64.rpm
+  	yum install -y https://yum.oracle.com/repo/OracleLinux/OL8/oracle/instantclient/aarch64/getPackage/oracle-instantclient${oracle_instant_client_version_short}-sqlplus-${oracle_instant_client_version_short}.0.0.0-1.aarch64.rpm
     yum install -y python36
     yum install -y python3-devel
     pip3 install --upgrade setuptools
