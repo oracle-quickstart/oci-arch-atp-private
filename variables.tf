@@ -1,4 +1,4 @@
-## Copyright (c) 2020, Oracle and/or its affiliates. 
+## Copyright (c) 2021, Oracle and/or its affiliates. 
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 variable "tenancy_ocid" {}
@@ -7,22 +7,22 @@ variable "region" {}
 variable "fingerprint" {}
 variable "user_ocid" {}
 variable "private_key_path" {}
-variable "availablity_domain_name" {}
+variable "availability_domain_name" {}
 variable "ATP_password" {}
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.4"
+  default     = "1.5"
 }
 
 variable "oracle_instant_client_version" {
-#  default     = "21.1"
-   default     = "19.10"
+  #  default     = "21.1"
+  default = "19.10"
 }
 
 variable "oracle_instant_client_version_short" {
-#  default     = "21"
-  default     = "19.10"
+  #  default     = "21"
+  default = "19.10"
 }
 
 variable "VCN-CIDR" {
@@ -42,15 +42,15 @@ variable "VCNname" {
 }
 
 variable "Shape" {
-   default = "VM.Standard.A1.Flex"
+  default = "VM.Standard.A1.Flex"
 }
 
 variable "Shape_flex_ocpus" {
-    default = 1
+  default = 1
 }
 
 variable "Shape_flex_memory" {
-    default = 10
+  default = 10
 }
 
 variable "ssh_public_key" {
@@ -74,7 +74,7 @@ variable "ATP_database_data_storage_size_in_tbs" {
 }
 
 variable "ATP_database_db_name" {
-  default = "myatpdb"
+  default = "atppriv"
 }
 
 variable "ATP_database_db_version" {
@@ -86,12 +86,12 @@ variable "ATP_database_defined_tags_value" {
 }
 
 variable "ATP_database_display_name" {
-  default = "ATP"
+  default = "ATPpriv"
 }
 
 variable "ATP_database_freeform_tags" {
   default = {
-    "Owner" = "ATP"
+    "Owner" = "ATPpriv"
   }
 }
 
@@ -100,7 +100,7 @@ variable "ATP_database_license_model" {
 }
 
 variable "ATP_tde_wallet_zip_file" {
-  default = "tde_wallet_ATPdb1.zip"
+  default = "tde_wallet_ATPpriv.zip"
 }
 
 variable "ATP_private_endpoint_label" {
@@ -115,7 +115,7 @@ variable "instance_os" {
 variable "linux_os_version" {
   description = "Operating system version for all Linux instances"
   default     = "7.9"
-#  default     = "8"
+  #  default     = "8"
 }
 
 # Dictionary Locals

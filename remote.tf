@@ -1,12 +1,12 @@
-## Copyright (c) 2020, Oracle and/or its affiliates. 
+## Copyright (c) 2021, Oracle and/or its affiliates. 
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 data "template_file" "flask_ATP_py_template" {
   template = file("./scripts/flask_ATP.py")
 
   vars = {
-    ATP_password = var.ATP_password
-    ATP_alias = join("",[var.ATP_database_db_name,"_medium"])
+    ATP_password                        = var.ATP_password
+    ATP_alias                           = join("", [var.ATP_database_db_name, "_medium"])
     oracle_instant_client_version_short = var.oracle_instant_client_version_short
   }
 }
@@ -23,8 +23,8 @@ data "template_file" "flask_bootstrap_template" {
   template = file("./scripts/flask_bootstrap.sh")
 
   vars = {
-    ATP_tde_wallet_zip_file = var.ATP_tde_wallet_zip_file
-    oracle_instant_client_version = var.oracle_instant_client_version
+    ATP_tde_wallet_zip_file             = var.ATP_tde_wallet_zip_file
+    oracle_instant_client_version       = var.oracle_instant_client_version
     oracle_instant_client_version_short = var.oracle_instant_client_version_short
   }
 }
@@ -38,7 +38,8 @@ data "template_file" "sqlnet_ora_template" {
 }
 
 resource "null_resource" "Webserver1_ConfigMgmt" {
-  depends_on = [oci_core_instance.Webserver1, oci_database_autonomous_database.ATPdatabase]
+  #  depends_on = [oci_core_instance.Webserver1, oci_database_autonomous_database.ATPdatabase]
+  depends_on = [oci_core_instance.Webserver1, module.oci-adb.adb_database]
 
   provisioner "file" {
     connection {
@@ -55,7 +56,8 @@ resource "null_resource" "Webserver1_ConfigMgmt" {
   }
 
   provisioner "local-exec" {
-    command = "echo '${oci_database_autonomous_database_wallet.ATP_database_wallet.content}' >> ${var.ATP_tde_wallet_zip_file}_encoded"
+    command = "echo '${module.oci-adb.adb_database.adb_wallet_content}' >> ${var.ATP_tde_wallet_zip_file}_encoded"
+    #    command = "echo '${oci_database_autonomous_database_wallet.ATP_database_wallet.content}' >> ${var.ATP_tde_wallet_zip_file}_encoded"
   }
 
   provisioner "local-exec" {
@@ -133,7 +135,7 @@ resource "null_resource" "Webserver1_ConfigMgmt" {
       timeout     = "10m"
     }
     inline = [
-    "chmod +x /tmp/flask_bootstrap.sh",
+      "chmod +x /tmp/flask_bootstrap.sh",
     "sudo /tmp/flask_bootstrap.sh"]
   }
 
