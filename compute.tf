@@ -1,4 +1,4 @@
-## Copyright (c) 2020, Oracle and/or its affiliates. 
+## Copyright (c) 2021, Oracle and/or its affiliates. 
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 data "template_file" "key_script" {
@@ -20,7 +20,7 @@ data "template_cloudinit_config" "cloud_init" {
 }
 
 resource "oci_core_instance" "Webserver1" {
-  availability_domain = var.availablity_domain_name
+  availability_domain = var.availability_domain_name
   compartment_id      = var.compartment_ocid
   display_name        = "WebServer1"
   shape               = var.Shape
@@ -29,7 +29,7 @@ resource "oci_core_instance" "Webserver1" {
     for_each = local.is_flexible_node_shape ? [1] : []
     content {
       memory_in_gbs = var.Shape_flex_memory
-      ocpus = var.Shape_flex_ocpus
+      ocpus         = var.Shape_flex_ocpus
     }
   }
 
@@ -40,7 +40,7 @@ resource "oci_core_instance" "Webserver1" {
 
   metadata = {
     ssh_authorized_keys = var.ssh_public_key
-    user_data = data.template_cloudinit_config.cloud_init.rendered
+    user_data           = data.template_cloudinit_config.cloud_init.rendered
   }
 
   create_vnic_details {
@@ -48,12 +48,12 @@ resource "oci_core_instance" "Webserver1" {
     nsg_ids   = [oci_core_network_security_group.WebSecurityGroup.id, oci_core_network_security_group.SSHSecurityGroup.id]
   }
 
-  defined_tags   = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+  defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 data "oci_core_vnic_attachments" "Webserver1_VNIC1_attach" {
-  availability_domain = var.availablity_domain_name
-  compartment_id = var.compartment_ocid
+  availability_domain = var.availability_domain_name
+  compartment_id      = var.compartment_ocid
   instance_id         = oci_core_instance.Webserver1.id
 }
 
