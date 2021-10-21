@@ -38,7 +38,6 @@ data "template_file" "sqlnet_ora_template" {
 }
 
 resource "null_resource" "Webserver1_ConfigMgmt" {
-  #  depends_on = [oci_core_instance.Webserver1, oci_database_autonomous_database.ATPdatabase]
   depends_on = [oci_core_instance.Webserver1, module.oci-adb.adb_database]
 
   provisioner "file" {
@@ -57,7 +56,6 @@ resource "null_resource" "Webserver1_ConfigMgmt" {
 
   provisioner "local-exec" {
     command = "echo '${module.oci-adb.adb_database.adb_wallet_content}' >> ${var.ATP_tde_wallet_zip_file}_encoded"
-    #    command = "echo '${oci_database_autonomous_database_wallet.ATP_database_wallet.content}' >> ${var.ATP_tde_wallet_zip_file}_encoded"
   }
 
   provisioner "local-exec" {
