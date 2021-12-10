@@ -21,7 +21,7 @@
       visible: true  
       variables:
       - compartment_ocid
-      - availablity_domain_name 
+      - availability_domain_name 
       - ATP_password
       - ATP_free_tier
       - ATP_private_endpoint
@@ -88,7 +88,7 @@
         title: Region
         description: "Region where you want to deploy the resources defined by this stack."
 
-      availablity_domain_name:
+      availability_domain_name:
         type: oci:identity:availabilitydomain:name
         required: true
         visibile: true
@@ -229,7 +229,7 @@
       ATP_private_endpoint:
         type: boolean
         visible: true
-        default: false
+        default: true
         required: false
         title: "ATP Database Private Endpoint"
         description: "Check the box to deploy ATP Database with Private Endpoint."
